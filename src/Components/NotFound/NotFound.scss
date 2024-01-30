@@ -1,0 +1,43 @@
+.notFound {
+    height: 94vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+
+    .col-5 img {
+        width: 100%;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 150px;
+    }
+
+    h2 {
+        font-size: 40px;
+    }
+
+    .col-7 {
+        text-align: center;
+    }
+
+    .back {
+        width: 150px;
+        display: block;
+        padding: 5px 16px;
+        margin: 20px auto;
+        font-size: 22px;
+        text-decoration: none;
+        border: 1px solid rgba($color: #000000, $alpha: .6);
+        border-radius: 10px;
+        color: rgba($color: #000000, $alpha: .7);
+        background-color: rgba($color: #add8e6, $alpha: .3);
+
+        &:hover {
+            background-color: rgba($color: #add8e6, $alpha: .5);
+            border: 1px solid rgba($color: #000000, $alpha: .8);
+            color: rgba($color: #000000, $alpha: .8);
+        }
+    }
+}
