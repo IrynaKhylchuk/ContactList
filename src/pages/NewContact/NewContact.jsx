@@ -20,8 +20,8 @@ const NewContact = () => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().min(2).max(20).required('Name is required'),
         phone: Yup.number().positive().required('Phone is required'),
-        email: Yup.string().email('Invalid email.').required('Email is required'),
-        avatar: Yup.string().url('Invalid URL.').required('Avatar is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        avatar: Yup.string().url('Invalid URL').required('Avatar is required'),
         gender: Yup.string().oneOf(['Male', 'Female'], 'Invalid gender').required('Gender is required'),
         status: Yup.string().oneOf(['Work', 'Family', 'Privet', 'Friends'], 'Invalid status').required('Status is required'),
         favorite: Yup.boolean()
