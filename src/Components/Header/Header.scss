@@ -1,84 +1,84 @@
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-transform: uppercase;
+.topnav {
+    background-color: #262341;
 
-    .logo {
-        display:  flex;
-        align-items: center;
-        
-        img {
-            width: 50px;
-            height: auto;
-        }
-        
-        a {
-            margin: 0 10px;
-            font-weight: 700;
-            font-size: 20px;
-
-            &:hover {
-                color : rgba($color: white, $alpha: .8);
-            }
-        }
-    }
-
-    .add-search {
+    nav {
+        padding: 10px 0;
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        text-transform: uppercase;
 
         a {
-            font-weight:500;
-
+            text-decoration: none;
+            color: white;
+            
             &:hover {
-                color : rgba($color: white, $alpha: .8);
+                color: #f9d94a;
             }
         }
-
-        .searchBox {
-            background: rgba($color: white, $alpha: .6);
-            height: 40px;
-            border-radius: 40px;
-            margin-left: 15px;
-
-            &:hover .searchInput {
-                width: 200px;
-                padding: 0 10px;
-            }
-
-            &:hover .searchButton {
-                background: rgba($color: white, $alpha: .7);
-                color : rgba($color: black, $alpha: .6);
-            }
-
-            .searchButton {
-                color: rgba($color: black, $alpha: .6);
-                float: right;
+    
+        .logo {
+            display:  flex;
+            align-items: center;
+            
+            img {
                 width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: rgba($color: white, $alpha: .5);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s;
-                border: none;
+                height: auto;
             }
-
-            .searchInput {
-                border: none;
-                background: none;
-                outline: none;
-                float: left;
-                padding: 0;
-                color: white;
-                font-size: 16px;
-                transition: 0.4s;
-                line-height: 40px;
-                width: 0px;
+            
+            a {
+                margin: 0 10px;
+                font-size: 20px;
+            }
+        }
+    
+        .add-search {
+            display: flex;
+            align-items: center;
+    
+            .searchBox {
+                background: rgba($color: white, $alpha: .6);
+                height: 40px;
+                border-radius: 40px;
+                margin-left: 15px;
+    
+                &:hover .searchInput {
+                    width: 200px;
+                    padding: 0 10px;
+                }
+    
+                &:hover .searchButton {
+                    background: rgba($color: white, $alpha: .7);
+                    color : rgba($color: black, $alpha: .6);
+                }
+    
+                .searchButton {
+                    color: rgba($color: black, $alpha: .6);
+                    float: right;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: rgba($color: white, $alpha: .5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: 0.4s;
+                    border: none;
+                }
+    
+                .searchInput {
+                    border: none;
+                    background: none;
+                    outline: none;
+                    float: left;
+                    padding: 0;
+                    color: white;
+                    font-size: 16px;
+                    transition: 0.4s;
+                    line-height: 40px;
+                    width: 0px;
+                }
             }
         }
     }
-
 }

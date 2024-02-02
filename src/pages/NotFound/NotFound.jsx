@@ -1,5 +1,10 @@
-import { Link } from "react-router-dom"
+// scss
 import './NotFound.scss'
+
+// link
+import { Link } from "react-router-dom"
+
+// img
 import loadImg from '../../assets/imgs/giphy.gif'
 
 const NotFound = () => {
@@ -18,7 +23,6 @@ const NotFound = () => {
             </Link>
                 </div>
             </div>
-            
         </div>
     )
 }

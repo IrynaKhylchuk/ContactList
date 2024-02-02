@@ -1,18 +1,19 @@
+// scss
 import './ContactList.scss'
 
-//import components
+// components
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import ContactItem from '../../Components/ContactItem/ContactItem'
 
-const ContactList = () => {
+const ContactList = ( {store} ) => {
     return (
-        <main className='container rounded'>
+        <main className='container'>
             <div className="row">
-                <div className="col-3">
+                <div className="col-4">
                     <Sidebar />
                 </div>
-                <div className="col-9">
-                    <ContactItem />
+                <div className="col-8">
+                    <ContactItem store={store}/>
                 </div>
             </div>
         </main>
