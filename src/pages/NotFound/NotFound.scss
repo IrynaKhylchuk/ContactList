@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    color: #555555;
 
     .col-5 img {
         width: 100%;
@@ -29,15 +30,15 @@
         margin: 20px auto;
         font-size: 22px;
         text-decoration: none;
-        border: 1px solid rgba($color: white, $alpha: .5);
         border-radius: 10px;
-        color: rgba($color: white, $alpha: 1);
-        background-color: rgba($color: white, $alpha: .2);
+        text-transform: capitalize;
+        background-color: #4372d9;
+        border: none;
+        color: white;
 
-        &:hover {
-            background-color: rgba($color: white, $alpha: .3);
-            border: 1px solid rgba($color: white, $alpha: .6);
-            color: rgba($color: white, $alpha: 1);
+        &:hover, 
+        &:focus {
+            background-color: #3f6bca;
         }
     }
 }

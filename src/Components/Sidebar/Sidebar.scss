@@ -1,9 +1,9 @@
 .sidebar {
-    text-transform: uppercase;
+    text-transform: capitalize;
     background: rgba($color: white, $alpha: .4);
     animation: opacityChange .8s;
-    color: black;
-    border-right: 1px solid black;
+    color: #555555;
+    border-right: 1px solid #dbdbdb;
 
     ul {
         list-style: none;
@@ -16,7 +16,7 @@
             padding: 10px 20px;
 
             &:first-child {
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid #dbdbdb;
             }
         }
     }

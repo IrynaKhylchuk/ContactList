@@ -9,10 +9,10 @@ const ContactList = ( {store} ) => {
     return (
         <main className='container'>
             <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                     <Sidebar />
                 </div>
-                <div className="col-8">
+                <div className="col-9">
                     <ContactItem store={store}/>
                 </div>
             </div>

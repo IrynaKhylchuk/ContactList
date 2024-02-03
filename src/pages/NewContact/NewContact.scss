@@ -5,7 +5,7 @@
 .AddPage {
     margin: 0 auto;
     background-color: white;
-    text-transform: uppercase;
+    text-transform: capitalize;
     animation: opacityChange .8s;
     color: #555555;
     padding: 50px;
@@ -68,7 +68,7 @@
         padding: 8px 16px;
         border-radius: 10px;
         margin-top: 10px;
-        text-transform: uppercase;
+        text-transform: capitalize;
         background-color: #4372d9;
         border: none;
         color: white;
