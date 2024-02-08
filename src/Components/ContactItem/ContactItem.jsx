@@ -5,18 +5,16 @@ import "./ContactItem.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-// navigation
-import { useNavigate } from 'react-router-dom'
+// link
+import { Link } from "react-router-dom"
 
-const ContactItem = ( {store} ) => {
-    let navigate = useNavigate()
-
-    const routeChange = () => { 
-        navigate('/update-contact')
+const ContactItem = ( {store, onDeleteContact, onEditContact} ) => {
+    const deleteContact = (id) => {
+        onDeleteContact(id)
     }
-    
-    const imgSrc = (gender, num) => {
-        return `https://randomuser.me/api/portraits/${gender.toLowerCase()}/${num}.jpg`
+
+    const editContact = (id) => {
+        onEditContact(id)
     }
 
     return (
@@ -27,7 +25,7 @@ const ContactItem = ( {store} ) => {
                         <button>
                             <FontAwesomeIcon icon={faStar}  className="favorite-icon"/>
                         </button>
-                        <img src={imgSrc(contact.gender, contact.avatar)} alt="avatar" />
+                        <img src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`} alt="avatar" />
                         <div className="name-number">
                             <h3 className="font-medium">{contact.name}</h3>
                             <p>{contact.phone}</p>
@@ -40,10 +38,12 @@ const ContactItem = ( {store} ) => {
                         <p>{contact.email}</p>
                     </div>
                     <div className="col-2">
-                        <button onClick={routeChange}>
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                        </button>
-                        <button>
+                        <Link to='/update-contact'>
+                            <button onClick={() => editContact(contact.id)}>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                            </button>
+                        </Link>
+                        <button onClick={() => deleteContact(contact.id)}>
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>

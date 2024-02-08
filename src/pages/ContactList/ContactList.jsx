@@ -5,7 +5,7 @@ import './ContactList.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import ContactItem from '../../Components/ContactItem/ContactItem'
 
-const ContactList = ( {store} ) => {
+const ContactList = ( {store, onDeleteContact, onEditContact} ) => {
     return (
         <main className='container'>
             <div className="row">
@@ -13,7 +13,7 @@ const ContactList = ( {store} ) => {
                     <Sidebar />
                 </div>
                 <div className="col-9">
-                    <ContactItem store={store}/>
+                    <ContactItem store={store} onDeleteContact={onDeleteContact} onEditContact={onEditContact}/>
                 </div>
             </div>
         </main>
