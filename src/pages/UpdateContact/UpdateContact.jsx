@@ -3,29 +3,42 @@ import './UpdateContact.scss'
 
 // form
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { validationSchema } from './validation/validation'
+import { validationSchema } from '../../assets/validation/validation'
 
 // navigation
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const UpdateContact = ( { store, getUserId, onSave } ) => {
-    let contact = store.filter(contact => contact.id === getUserId())
+// redux
+import { useSelector, useDispatch } from 'react-redux'
+import { updateContact } from '../../redux/actions'
+
+
+const UpdateContact = ({ categories }) => {
+    const { id } = useParams()
+    const dispatch = useDispatch()
+
+    const contacts = useSelector(state => state.contacts)
+
+    let contact = contacts.find(contact => contact.id === id)
 
     const initialValues = {
-        id: contact[0].id,
-        name: contact[0].name,
-        phone: contact[0].phone,
-        email: contact[0].email,
-        avatar: contact[0].avatar,
-        gender: contact[0].gender,
-        status: contact[0].status,
-        favorite: contact[0].favorite
+        id: contact.id,
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        avatar: contact.avatar,
+        gender: contact.gender,
+        category: contact.category,
+        favorite: contact.favorite
     }
 
     const navigate = useNavigate()
 
     const handleSubmit = (values) => {
-        onSave(values)
+        if (contact !== values) {
+            dispatch(updateContact(values))
+        }
+
         navigate('/')
     }
 
@@ -72,15 +85,16 @@ const UpdateContact = ( { store, getUserId, onSave } ) => {
                             <ErrorMessage name="gender" component="p" className="text-danger position-absolute"/>
                         </div>                    
                         <div>
-                            <label htmlFor="status">Status</label>
-                            <Field as="select" name="status">
-                                <option value="" disabled hidden>Choose status</option>
-                                <option value="Work">Work</option>
-                                <option value="Family">Family</option>
-                                <option value="Private">Private</option>
-                                <option value="Friends">Friends</option>
+                            <label htmlFor="category">Category</label>
+                            <Field as="select" name="category">
+                                <option value="" disabled hidden>Choose category</option>
+                                {categories.map((category) => (
+                                    <option key={category.category} value={category.category}>
+                                        {category.category} 
+                                    </option>
+                                ))}
                             </Field>
-                            <ErrorMessage name="status" component="p" className="text-danger position-absolute"/>
+                            <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
                         </div>                    
                         <div>
                             <label htmlFor="favorite">Favorite</label>

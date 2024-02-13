@@ -1,29 +1,35 @@
 // scss
 import "./ContactItem.scss"
 
-// font awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faStar, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+// icons
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 // link
 import { Link } from "react-router-dom"
 
-const ContactItem = ( {store, onDeleteContact, onEditContact} ) => {
-    const deleteContact = (id) => {
-        onDeleteContact(id)
-    }
+// hooks
+import { useSelector, useDispatch } from "react-redux"
 
-    const editContact = (id) => {
-        onEditContact(id)
+// actions
+import { deleteContact } from "../../redux/actions"
+
+const ContactItem = ( ) => {
+    const contacts = useSelector(state => state.contacts)
+    const dispatch = useDispatch()
+
+    const handleDeleteContact = (id) => {
+        dispatch(deleteContact(id))
     }
 
     return (
         <div className="contactItem">
-            {store.map((contact) => (
+            {contacts.map((contact) => (
                 <div key={contact.id} className="row">
                     <div className="col-4 person">
                         <button>
-                            <FontAwesomeIcon icon={faStar}  className="favorite-icon"/>
+                            <StarBorderIcon/>
                         </button>
                         <img src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`} alt="avatar" />
                         <div className="name-number">
@@ -32,19 +38,19 @@ const ContactItem = ( {store, onDeleteContact, onEditContact} ) => {
                         </div>
                     </div>
                     <div className="col-2">
-                        <p>{contact.status}</p>
+                        <p>{contact.category}</p>
                     </div>
                     <div className="col-4">
                         <p>{contact.email}</p>
                     </div>
                     <div className="col-2">
-                        <Link to='/update-contact'>
-                            <button onClick={() => editContact(contact.id)}>
-                                <FontAwesomeIcon icon={faPenToSquare} />
+                        <Link to={`/update-contact/${contact.id}`}>
+                            <button>
+                                <EditIcon />
                             </button>
                         </Link>
-                        <button onClick={() => deleteContact(contact.id)}>
-                            <FontAwesomeIcon icon={faTrash} />
+                        <button onClick={() => handleDeleteContact(contact.id)}>
+                            <DeleteIcon />
                         </button>
                     </div>
                 </div>

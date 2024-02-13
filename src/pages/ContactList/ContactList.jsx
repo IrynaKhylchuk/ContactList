@@ -5,15 +5,16 @@ import './ContactList.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import ContactItem from '../../Components/ContactItem/ContactItem'
 
-const ContactList = ( {store, onDeleteContact, onEditContact} ) => {
+const ContactList = ({ categories, onNewCategory, onDeleteCategory, onEditCategory}) => {
     return (
         <main className='container'>
             <div className="row">
                 <div className="col-3">
-                    <Sidebar />
+                    <Sidebar categories={categories} onNewCategory={onNewCategory} 
+                    onDeleteCategory={onDeleteCategory} onEditCategory={onEditCategory}/>
                 </div>
                 <div className="col-9">
-                    <ContactItem store={store} onDeleteContact={onDeleteContact} onEditContact={onEditContact}/>
+                    <ContactItem />
                 </div>
             </div>
         </main>

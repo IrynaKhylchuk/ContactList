@@ -7,9 +7,8 @@ import { Link } from "react-router-dom"
 // imgs
 import logo from '../../assets/imgs/logo.png'
 
-// font awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+// icons
+import SearchIcon from '@mui/icons-material/Search';
 
 const Header = () => {
     return (
@@ -28,7 +27,7 @@ const Header = () => {
                     <div className="searchBox">
                         <input className="searchInput" type="text" name="search" placeholder="Search" />
                         <button className="searchButton">
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </div>

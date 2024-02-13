@@ -14,78 +14,45 @@ import NotFound from './pages/NotFound/NotFound'
 // hooks
 import { useState } from "react"
 
+// redux
+import { Provider } from 'react-redux'
+import store from './store'
+
 function App() {
-  const [store, setStore] = useState(
+  const [categories, setCategories] = useState(
     [
       {
-        id: 'cb1f89af-e866-4ca7-9118-e9e74c2dc0e2',
-        name: 'John',
-        phone: '1234567890',
-        email: 'johnDoe@mail.com',
-        avatar: 45,
-        gender: 'Men',
-        status: 'Work',
-        favorite: true
-      },
-      {
-        id: 'cb1f89af-e866-4ca7-9118-e9e74c2dc0e3',
-        name: 'Jane',
-        phone: '1234567890',
-        email: 'janeDoe@mail.com',
-        avatar: 55,
-        gender: 'Women',
-        status: 'Friends',
-        favorite: true
+        category: 'Other',
+        numberOfContacts: 0
       }
     ]
   )
 
-  const handleNewContact = (newContact) => {
-    setStore(prevStore => [...prevStore, newContact])
+  const handelNewCategory = (newCategory) => {
+    setCategories(prevCategories => [...prevCategories, newCategory])
   }
 
-  const deleteContact = (id) => {
-    setStore(prevStore => prevStore.filter(contact => contact.id !== id))
+  const handleDeleteCategory = (category) => {
+    setCategories(prevCategories => prevCategories.filter(cat => cat.category !== category))
   }
 
-  let currentUserId
-
-  const setUserId = (id) => {
-    currentUserId = id
-  }
-
-  const getUserId = () => {
-    return currentUserId
-  }
-
-  const onSave = (values) => {
-    const editContact = {
-        id: values.id,
-        name: values.name,
-        phone: values.phone,
-        email: values.email,
-        avatar: values.avatar,
-        gender: values.gender,
-        status: values.status,
-        favorite: values.favorite
-      }
-    console.log(editContact)
-
-    setStore(prevStore => prevStore.filter(contact => contact.id !== values.id))
-    setStore(prevStore => [...prevStore, editContact])
-    console.log(values.id)
+  const handleUpdateCategory = (updatedCategory) => {
+    console.log('updatedCategory')
   }
 
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path='/' element={<ContactList store={store} onDeleteContact={deleteContact} onEditContact={setUserId}/>}/>
-        <Route path='/new-contact' element={<NewContact onNewContact={handleNewContact}/>}/>
-        <Route path='/update-contact' element={<UpdateContact store={store} getUserId={getUserId} onSave={onSave}/>} />
-        <Route path='*' element={<NotFound />}/>
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path='/' element={<ContactList categories={categories} 
+          onNewCategory={handelNewCategory} onDeleteCategory={handleDeleteCategory} onEditCategory={handleUpdateCategory}/>}/>
+          <Route path='/new-contact' element={<NewContact categories={categories}/>}/>
+          <Route path='/update-contact/:id' element={<UpdateContact categories={categories}/>} />
+          <Route path='*' element={<NotFound />}/>
+        </Routes>
+      </Router>
+    </Provider>
   )
 }
 

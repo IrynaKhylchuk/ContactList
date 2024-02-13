@@ -3,15 +3,20 @@ import './NewContact.scss'
 
 // form
 import {Formik, Form, Field, ErrorMessage} from 'formik'
-import { validationSchema } from './validation/validation'
+import { validationSchema } from '../../assets/validation/validation'
 
 // id
 import {v4 as uuidv4} from 'uuid'
 
 // navigation
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addContact } from '../../redux/actions'
 
-const NewContact = ({ onNewContact }) => {
+const NewContact = ({ categories }) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const initialValues = {
         id: uuidv4(),
         name: '',
@@ -19,14 +24,12 @@ const NewContact = ({ onNewContact }) => {
         email: '',
         avatar: '',
         gender: '',
-        status: '',
+        category: '',
         favorite: false
     }
 
-    const navigate = useNavigate()
-
     const handleSubmit = (values) => {
-        onNewContact(values)
+        dispatch(addContact(values))
         navigate('/')
     }
 
@@ -73,15 +76,16 @@ const NewContact = ({ onNewContact }) => {
                             <ErrorMessage name="gender" component="p" className="text-danger"/>
                         </div>                    
                         <div>
-                            <label htmlFor="status">Status</label>
-                            <Field as="select" name="status">
-                                <option value="" disabled hidden>Choose status</option>
-                                <option value="Work">Work</option>
-                                <option value="Family">Family</option>
-                                <option value="Private">Private</option>
-                                <option value="Friends">Friends</option>
+                            <label htmlFor="category">category</label>
+                            <Field as="select" name="category">
+                                <option value="" disabled hidden>Choose category</option>
+                                {categories.map((category) => (
+                                    <option key={category.category} value={category.category}>
+                                        {category.category} 
+                                    </option>
+                                ))}
                             </Field>
-                            <ErrorMessage name="status" component="p" className="text-danger"/>
+                            <ErrorMessage name="category" component="p" className="text-danger"/>
                         </div>                    
                         <div>
                             <label htmlFor="favorite">Favorite</label>
