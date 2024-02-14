@@ -2,9 +2,9 @@
 import "./ContactItem.scss"
 
 // icons
-import StarBorderIcon from '@mui/icons-material/StarBorder'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+import StarBorderIcon from "@mui/icons-material/StarBorder"
+import EditIcon from "@mui/icons-material/Edit"
+import DeleteIcon from "@mui/icons-material/Delete"
 
 // link
 import { Link } from "react-router-dom"
@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from "react-redux"
 // actions
 import { deleteContact } from "../../redux/actions"
 
-const ContactItem = ( ) => {
+const ContactItem = () => {
     const contacts = useSelector(state => state.contacts)
     const dispatch = useDispatch()
 

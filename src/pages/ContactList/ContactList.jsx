@@ -1,13 +1,13 @@
 // scss
-import './ContactList.scss'
+import "./ContactList.scss"
 
 // components
-import Sidebar from '../../Components/Sidebar/Sidebar'
-import ContactItem from '../../Components/ContactItem/ContactItem'
+import Sidebar from "../../Components/Sidebar/Sidebar"
+import ContactItem from "../../Components/ContactItem/ContactItem"
 
 const ContactList = ({ categories, onNewCategory, onDeleteCategory, onEditCategory}) => {
     return (
-        <main className='container'>
+        <main className="container">
             <div className="row">
                 <div className="col-3">
                     <Sidebar categories={categories} onNewCategory={onNewCategory} 

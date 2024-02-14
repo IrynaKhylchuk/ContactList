@@ -2,10 +2,10 @@
     background-color: #262341;
 
     nav {
-        padding: 10px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 10px 0;
         text-transform: uppercase;
 
         a {
@@ -39,8 +39,8 @@
             .searchBox {
                 background: rgba($color: white, $alpha: .6);
                 height: 40px;
-                border-radius: 40px;
                 margin-left: 15px;
+                border-radius: 40px;
     
                 &:hover .searchInput {
                     width: 200px;
@@ -53,30 +53,30 @@
                 }
     
                 .searchButton {
-                    color: rgba($color: black, $alpha: .6);
-                    float: right;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    background: rgba($color: white, $alpha: .5);
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    transition: 0.4s;
+                    float: right;
+                    width: 40px;
+                    height: 40px;
+                    background: rgba($color: white, $alpha: .5);
+                    color: rgba($color: black, $alpha: .6);
                     border: none;
+                    border-radius: 50%;
+                    transition: 0.4s;
                 }
     
                 .searchInput {
+                    width: 0px;
+                    line-height: 40px;
+                    padding: 0;
+                    float: left;
                     border: none;
                     background: none;
                     outline: none;
-                    float: left;
-                    padding: 0;
                     color: white;
                     font-size: 16px;
                     transition: 0.4s;
-                    line-height: 40px;
-                    width: 0px;
                 }
             }
         }

@@ -1,11 +1,11 @@
 // scss
-import './NotFound.scss'
+import "./NotFound.scss"
 
 // link
 import { Link } from "react-router-dom"
 
 // img
-import loadImg from '../../assets/imgs/giphy.gif'
+import loadImg from "../../assets/imgs/giphy.gif"
 
 const NotFound = () => {
     return (
@@ -18,7 +18,7 @@ const NotFound = () => {
                     <h1>404</h1>
                     <h2>not found</h2>
                     <span>Ніколи такого не було і ось знову</span>
-                    <Link className="back" to='/'>
+                    <Link className="back" to="/">
                 Back
             </Link>
                 </div>

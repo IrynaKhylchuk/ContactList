@@ -41,8 +41,10 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 contacts: state.contacts.map(contact => {
-                    if (contact.id === action.payload) {
-                      return {...contact, action}
+                    let updatedContact = action.payload
+
+                    if (contact.id === updatedContact.id) {
+                      return {...contact, ...updatedContact}
                     } return contact
                   })
             }

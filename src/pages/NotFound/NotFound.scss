@@ -1,12 +1,17 @@
 .notFound {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-transform: capitalize;
+    text-align: center;
     color: #555555;
+    
+    > div { 
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        
+    }
 
-    .col-5 img {
+    img {
         width: 100%;
         height: auto;
     }
@@ -19,22 +24,18 @@
         font-size: 40px;
     }
 
-    .col-7 {
-        text-align: center;
-    }
-
     .back {
-        width: 150px;
         display: block;
-        padding: 5px 16px;
+        width: 150px;
         margin: 20px auto;
-        font-size: 22px;
-        text-decoration: none;
+        padding: 5px 16px;
         border-radius: 10px;
+        font-size: 22px;
         text-transform: capitalize;
         background-color: #4372d9;
-        border: none;
         color: white;
+        text-decoration: none;
+        border: none;
 
         &:hover, 
         &:focus {
