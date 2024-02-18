@@ -12,43 +12,18 @@ import UpdateContact from "./pages/UpdateContact/UpdateContact"
 import NotFound from "./pages/NotFound/NotFound"
 
 // hooks
-import { useState } from "react"
 import { Provider } from "react-redux"
-
-// redux
 import store from "./store"
 
 function App() {
-  const [categories, setCategories] = useState(
-    [
-      {
-        category: "Other",
-        numberOfContacts: 0
-      }
-    ]
-  )
-
-  const handelNewCategory = (newCategory) => {
-    setCategories(prevCategories => [...prevCategories, newCategory])
-  }
-
-  const handleDeleteCategory = (category) => {
-    setCategories(prevCategories => prevCategories.filter(cat => cat.category !== category))
-  }
-
-  const handleUpdateCategory = (updatedCategory) => {
-    console.log(updatedCategory)
-  }
-
   return (
     <Provider store={store}>
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<ContactList categories={categories} 
-          onNewCategory={handelNewCategory} onDeleteCategory={handleDeleteCategory} onEditCategory={handleUpdateCategory}/>}/>
-          <Route path="/new-contact" element={<NewContact categories={categories}/>}/>
-          <Route path="/update-contact/:id" element={<UpdateContact categories={categories}/>} />
+          <Route path="/" element={<ContactList />}/>
+          <Route path="/new-contact" element={<NewContact />}/>
+          <Route path="/update-contact/:id" element={<UpdateContact />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>
       </Router>

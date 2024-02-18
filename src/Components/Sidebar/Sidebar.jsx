@@ -8,58 +8,78 @@ import EditIcon from "@mui/icons-material/Edit"
 
 // hooks
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 // form
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
-const Sidebar = ({ categories, onNewCategory, onDeleteCategory, onEditCategory }) => {
-    const contacts = useSelector(state => state.contacts)
+// id
+import { v4 as uuidv4 } from "uuid"
+
+// actions
+import { addCategory, deleteCategory, updateCategory } from "../../redux/actions"
+
+const Sidebar = () => {
     const [hide, setHide] = useState(false)
     const [hideEdit, setHideEdit] = useState(false)
     const [hoveredCategory, setHoveredCategory] = useState(null)
+    const [{id, category, numberOfContacts}, setInitialValues] = useState({id: "", category: "", numberOfContacts: 0})
 
-    categories.forEach(cat => {
-        cat.numberOfContacts = contacts.filter((obj) => obj.category === cat.category).length
-    })
+    const contacts = useSelector(state => state.contacts)
+    const categories = useSelector(state => state.categories)
+    const dispatch = useDispatch()
 
     const allContacts = contacts.length
+    categories.forEach(cat => {
+        cat.numberOfContacts = contacts.filter((obj) => obj.categoryId === cat.id).length
+    })
     
-    const toggleHide = () => {
-        setHide(!hide)
-    }
-    const toggleHideEdit = () => {
-        setHideEdit(!hideEdit)
-    }
-
     const initialValues = {
+        id: "",
         category: "",
-        numberOfContacts: ""
-    }
+        numberOfContacts: 0
+    }    
 
-    const initialValuesEdit = {
-        category: ""
-    }
-    
     const validationSchema = Yup.object().shape({
         category: Yup.string().required("Category is required")
     })
 
-    const deleteCategory = (category) => {
-        onDeleteCategory(category)
-    }
-    
-    const handleSubmit = (value, {resetForm}) => {
+    const handleSubmit = (values, { resetForm }) => {
+        values.id = uuidv4()
+        let categoryNames = categories.map(category => category.category.toLowerCase())
+
+        if (categoryNames.indexOf(values.category.toLowerCase()) !== -1) {
+            alert("This category already exists")
+        } else
+        dispatch(addCategory(values))
         resetForm()
-        onNewCategory(value)
         setHide(false)
     }
-
-    const handleSubmitEdit = (value, {resetForm}) => {
+    
+    const handleDeleteCategory = (id) => {
+        dispatch(deleteCategory(id))
+    }
+    
+    const handleSubmitEdit = (values, {resetForm}) => {
+        dispatch(updateCategory(values))
         resetForm()
         setHideEdit(false)
-        onEditCategory(value)
+    }
+    
+    const toggleHide = () => {
+        setHide(!hide)
+    }
+    
+    const toggleHideEdit = (category) => {
+        setInitialValues(category)
+        setHideEdit(!hideEdit)
+    }
+    
+    let initialValuesEdit = {
+        id: id,
+        category: category,
+        numberOfContacts: numberOfContacts
     }
 
     return (
@@ -75,16 +95,18 @@ const Sidebar = ({ categories, onNewCategory, onDeleteCategory, onEditCategory }
                 </li>
                 
                 {categories.map((category) => (
-                    <li className="position-relative" key={category.category} 
-                        onMouseEnter={() => setHoveredCategory(category.category)}
+                    <li className="position-relative" key={category.id}
+                        onMouseEnter={() => setHoveredCategory(category.id)}
                         onMouseLeave={() => setHoveredCategory(null)}
                     >
                         {category.category} 
                         <span>{category.numberOfContacts}</span>
-                        {hoveredCategory === category.category && (
+                        {hoveredCategory === category.id && (
                             <div className="position-absolute editDelete">
-                                <button onClick={toggleHideEdit}><EditIcon /></button>
-                                <button onClick={() => deleteCategory(category.category)}><DeleteIcon /></button>
+                                <button onClick={() => {
+                                    toggleHideEdit(category)
+                                    }}><EditIcon /></button>
+                                <button onClick={() => handleDeleteCategory(category.id)}><DeleteIcon /></button>
                             </div>
                         )}
                     </li>
@@ -107,14 +129,18 @@ const Sidebar = ({ categories, onNewCategory, onDeleteCategory, onEditCategory }
 
             <div style={{ display: hideEdit ? "block" : "none" }} className="position-absolute editCategory">
                 <h1 className="font-medium">Edit category</h1>
-                <Formik initialValues={initialValuesEdit} validationSchema={validationSchema} onSubmit={handleSubmitEdit}>
+                <Formik 
+                    initialValues={initialValuesEdit} 
+                    enableReinitialize 
+                    validationSchema={validationSchema} 
+                    onSubmit={handleSubmitEdit}>
                     {() => (
-                    <Form>
-                        <label htmlFor="category">Category</label>
-                        <Field type="text" name="category" id="categoryEdit" placeholder="Category"/>
-                        <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
-                        <button type="submit">Save</button>
-                    </Form>
+                        <Form>
+                            <label htmlFor="category">Category</label>
+                            <Field type="text" name="category" id="categoryEdit" placeholder="Category"/>
+                            <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
+                            <button type="submit">Save</button>
+                        </Form>
                     )}
                 </Formik>
             </div>

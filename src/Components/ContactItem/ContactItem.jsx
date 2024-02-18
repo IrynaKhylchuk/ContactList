@@ -17,15 +17,31 @@ import { deleteContact } from "../../redux/actions"
 
 const ContactItem = () => {
     const contacts = useSelector(state => state.contacts)
+    const categories = useSelector(state => state.categories)
+    const searchSymbols = useSelector(state => state.searchSymbols)
     const dispatch = useDispatch()
 
     const handleDeleteContact = (id) => {
         dispatch(deleteContact(id))
     }
 
+    const getCategoryNameById = (categoryId) => {
+        let category = categories.find(c => c.id === categoryId)
+
+        if (category === undefined) {
+            return 'Undefined'
+        } 
+        return category.category
+    }
+
+    const filteredContacts = 
+    searchSymbols 
+    ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
+    : contacts
+
     return (
         <div className="contactItem">
-            {contacts.map((contact) => (
+            {filteredContacts.map(contact => (
                 <div key={contact.id} className="row">
                     <div className="col-4 person">
                         <button>
@@ -38,7 +54,7 @@ const ContactItem = () => {
                         </div>
                     </div>
                     <div className="col-2">
-                        <p>{contact.category}</p>
+                        <p>{getCategoryNameById(contact.categoryId)}</p>
                     </div>
                     <div className="col-4">
                         <p>{contact.email}</p>

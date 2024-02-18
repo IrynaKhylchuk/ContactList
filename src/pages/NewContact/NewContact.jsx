@@ -10,12 +10,13 @@ import { v4 as uuidv4 } from "uuid"
 
 // hooks
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { addContact } from "../../redux/actions"
 
-const NewContact = ({ categories }) => {
+const NewContact = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const categories = useSelector(state => state.categories)
 
     const initialValues = {
         id: uuidv4(),
@@ -24,7 +25,7 @@ const NewContact = ({ categories }) => {
         email: "",
         avatar: "",
         gender: "",
-        category: "",
+        categoryId: "",
         favorite: false
     }
 
@@ -68,7 +69,7 @@ const NewContact = ({ categories }) => {
                         </div>                         
                         <div>
                             <label htmlFor="gender">Gender</label>
-                            <Field as="select" name="gender">
+                            <Field as="select" name="gender" id="gender">
                                 <option value="" disabled hidden>Choose gender</option>
                                 <option value="Men">Men</option>
                                 <option value="Women">Women</option>
@@ -76,16 +77,16 @@ const NewContact = ({ categories }) => {
                             <ErrorMessage name="gender" component="p" className="text-danger"/>
                         </div>                    
                         <div>
-                            <label htmlFor="category">category</label>
-                            <Field as="select" name="category">
+                            <label htmlFor="categoryId">category</label>
+                            <Field as="select" name="categoryId" id="categoryId">
                                 <option value="" disabled hidden>Choose category</option>
                                 {categories.map((category) => (
-                                    <option key={category.category} value={category.category}>
+                                    <option key={category.id} value={category.id}>
                                         {category.category} 
                                     </option>
                                 ))}
                             </Field>
-                            <ErrorMessage name="category" component="p" className="text-danger"/>
+                            <ErrorMessage name="categoryId" component="p" className="text-danger"/>
                         </div>                    
                         <div>
                             <label htmlFor="favorite">Favorite</label>

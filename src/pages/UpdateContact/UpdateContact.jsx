@@ -10,11 +10,11 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { updateContact } from "../../redux/actions"
 
-
-const UpdateContact = ({ categories }) => {
+const UpdateContact = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const categories = useSelector(state => state.categories)
     const contacts = useSelector(state => state.contacts)
 
     let contact = contacts.find(contact => contact.id === id)
@@ -26,7 +26,7 @@ const UpdateContact = ({ categories }) => {
         email: contact.email,
         avatar: contact.avatar,
         gender: contact.gender,
-        category: contact.category,
+        categoryId: contact.categoryId,
         favorite: contact.favorite
     }
 
@@ -81,16 +81,16 @@ const UpdateContact = ({ categories }) => {
                             <ErrorMessage name="gender" component="p" className="text-danger position-absolute"/>
                         </div>                    
                         <div>
-                            <label htmlFor="category">Category</label>
-                            <Field as="select" name="category">
+                            <label htmlFor="categoryId">Category</label>
+                            <Field as="select" name="categoryId" id="categoryId">
                                 <option value="" disabled hidden>Choose category</option>
                                 {categories.map((category) => (
-                                    <option key={category.category} value={category.category}>
+                                    <option key={category.id} value={category.id}>
                                         {category.category} 
                                     </option>
                                 ))}
                             </Field>
-                            <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
+                            <ErrorMessage name="categoryId" component="p" className="text-danger position-absolute"/>
                         </div>                    
                         <div>
                             <label htmlFor="favorite">Favorite</label>
