@@ -24,21 +24,17 @@ const Sidebar = () => {
     const [hide, setHide] = useState(false)
     const [hideEdit, setHideEdit] = useState(false)
     const [hoveredCategory, setHoveredCategory] = useState(null)
-    const [{id, category, numberOfContacts}, setInitialValues] = useState({id: "", category: "", numberOfContacts: 0})
+    const [{id, category}, setInitialValues] = useState({id: "", category: ""})
 
     const contacts = useSelector(state => state.contacts)
     const categories = useSelector(state => state.categories)
     const dispatch = useDispatch()
 
     const allContacts = contacts.length
-    categories.forEach(cat => {
-        cat.numberOfContacts = contacts.filter((obj) => obj.categoryId === cat.id).length
-    })
     
     const initialValues = {
         id: "",
-        category: "",
-        numberOfContacts: 0
+        category: ""
     }    
 
     const validationSchema = Yup.object().shape({
@@ -47,6 +43,7 @@ const Sidebar = () => {
 
     const handleSubmit = (values, { resetForm }) => {
         values.id = uuidv4()
+        values.contacts = []
         let categoryNames = categories.map(category => category.category.toLowerCase())
 
         if (categoryNames.indexOf(values.category.toLowerCase()) !== -1) {
@@ -78,8 +75,7 @@ const Sidebar = () => {
     
     let initialValuesEdit = {
         id: id,
-        category: category,
-        numberOfContacts: numberOfContacts
+        category: category
     }
 
     return (
@@ -100,7 +96,7 @@ const Sidebar = () => {
                         onMouseLeave={() => setHoveredCategory(null)}
                     >
                         {category.category} 
-                        <span>{category.numberOfContacts}</span>
+                        <span>{category.contacts.length}</span>
                         {hoveredCategory === category.id && (
                             <div className="position-absolute editDelete">
                                 <button onClick={() => {

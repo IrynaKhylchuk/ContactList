@@ -23,12 +23,15 @@ const initialState = {
             favorite: true
         }
     ],
-    seacrhSymbols: '',
+    seacrhSymbols: "",
     categories: [
         {
             id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
             category: "Other",
-            numberOfContacts: 0
+            contacts: [
+                "cb1f89af-e866-4ca7-9118-e9e74c2dc0e2",
+                "cb1f89af-e866-4ca7-9118-e9e74c2dc0e3"
+            ]
         }
     ]
 }
@@ -38,7 +41,13 @@ const reducer = (state = initialState, action) => {
         case ADD_CONTACT:
             return {
                 ...state,
-                contacts: [...state.contacts, action.payload]
+                contacts: [...state.contacts, action.payload],
+                categories: state.categories.map(category => {
+                    if (category.id === action.payload.categoryId) {
+                        category.contacts.push(action.payload.id)
+                    }
+                    return category
+                  })
             }
         case DELETE_CONTACT:
             return {
@@ -53,8 +62,26 @@ const reducer = (state = initialState, action) => {
 
                     if (contact.id === updatedContact.id) {
                       return {...contact, ...updatedContact}
-                    } return contact
-                  })
+                    } 
+                    return contact
+                  }),
+                categories: state.categories.map(category => {
+                    const contactId = action.payload.id
+                    const newCategoryId = action.payload.categoryId
+                    const oldCategoryId = state.contacts.find(c => c.id === contactId).categoryId
+                    
+                    if (newCategoryId !== oldCategoryId) {
+                        const newCategory = state.categories.find(c => c.id === newCategoryId)
+                        const oldCategory = state.categories.find(c => c.id === oldCategoryId)
+
+                        oldCategory.contacts = oldCategory.contacts.filter(id => id !== contactId)
+
+                        if (newCategory.contacts.findIndex(id => id === contactId) === -1) {
+                            newCategory.contacts.push(contactId)
+                        }
+                    }
+                    return category
+                })
             }
         case SEARCH_CONTACT:
             return {
