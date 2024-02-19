@@ -1,4 +1,5 @@
-import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
+import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, 
+    FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
 
 const initialState = {
     contacts: [
@@ -23,7 +24,7 @@ const initialState = {
             favorite: true
         }
     ],
-    seacrhSymbols: "",
+    searchSymbols: "",
     categories: [
         {
             id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
@@ -86,7 +87,12 @@ const reducer = (state = initialState, action) => {
         case SEARCH_CONTACT:
             return {
                 ...state,
-                seacrhSymbols: action.payload
+                searchSymbols: action.payload
+            }
+        case FILTERED_CONTACTS:
+            return {
+                ...state,
+                contacts: state.contacts.filter(contact => action.payload.contacts.includes(contact.id))
             }
         case ADD_CATEGORY:
             return {
@@ -103,12 +109,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 categories: state.categories.map(category => {
                     let updatedCategory = action.payload
-                    let contactCategory = state.contacts.map(contact => contact.category)
 
                     if (category.id === updatedCategory.id) {
-                        if(category.category === contactCategory) {
-                            return contactCategory[0] = updatedCategory.category
-                        }
                         return {...category, ...updatedCategory}
                     } return category
                 })

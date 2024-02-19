@@ -18,7 +18,7 @@ import * as Yup from "yup"
 import { v4 as uuidv4 } from "uuid"
 
 // actions
-import { addCategory, deleteCategory, updateCategory } from "../../redux/actions"
+import { addCategory, deleteCategory, updateCategory, filteredContacts } from "../../redux/actions"
 
 const Sidebar = () => {
     const [hide, setHide] = useState(false)
@@ -44,9 +44,9 @@ const Sidebar = () => {
     const handleSubmit = (values, { resetForm }) => {
         values.id = uuidv4()
         values.contacts = []
-        let categoryNames = categories.map(category => category.category.toLowerCase())
+        let categoryName = categories.map(category => category.category.toLowerCase())
 
-        if (categoryNames.indexOf(values.category.toLowerCase()) !== -1) {
+        if (categoryName.indexOf(values.category.toLowerCase()) !== -1) {
             alert("This category already exists")
         } else
         dispatch(addCategory(values))
@@ -78,6 +78,11 @@ const Sidebar = () => {
         category: category
     }
 
+    const filteredContactsArr = (category) => {
+        dispatch(filteredContacts(category))
+        console.log(category)
+    }
+
     return (
         <div className="sidebar">
             <ul>
@@ -94,6 +99,7 @@ const Sidebar = () => {
                     <li className="position-relative" key={category.id}
                         onMouseEnter={() => setHoveredCategory(category.id)}
                         onMouseLeave={() => setHoveredCategory(null)}
+                        onClick={() => filteredContactsArr(category)}
                     >
                         {category.category} 
                         <span>{category.contacts.length}</span>

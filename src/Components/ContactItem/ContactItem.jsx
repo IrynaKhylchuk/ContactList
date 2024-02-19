@@ -17,13 +17,18 @@ import { deleteContact } from "../../redux/actions"
 
 const ContactItem = () => {
     const contacts = useSelector(state => state.contacts)
-    const categories = useSelector(state => state.categories)
     const searchSymbols = useSelector(state => state.searchSymbols)
+    const categories = useSelector(state => state.categories)
     const dispatch = useDispatch()
 
     const handleDeleteContact = (id) => {
         dispatch(deleteContact(id))
     }
+
+    const filteredContacts = 
+    searchSymbols 
+    ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
+    : contacts
 
     const getCategoryNameById = (categoryId) => {
         let category = categories.find(c => c.id === categoryId)
@@ -33,11 +38,6 @@ const ContactItem = () => {
         } 
         return category.category
     }
-
-    const filteredContacts = 
-    searchSymbols 
-    ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
-    : contacts
 
     return (
         <div className="contactItem">

@@ -1,4 +1,4 @@
-import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
+import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
 
 export const addContact = (newContact) => {
     return {
@@ -25,6 +25,13 @@ export const searchContact = (seacrhSymbols) => {
     return {
         type: SEARCH_CONTACT,
         payload: seacrhSymbols.toLowerCase()
+    }
+}
+
+export const filteredContacts = (filteredContactsArr) => {
+    return {
+        type: FILTERED_CONTACTS,
+        payload: filteredContactsArr
     }
 }
 
