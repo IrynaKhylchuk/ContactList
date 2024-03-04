@@ -38,7 +38,7 @@
     .editCategory {
         left: 50%;
         top: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         width: 400px;
         padding: 30px 50px;
         background-color: white;
@@ -50,7 +50,7 @@
             margin-bottom: 20px;
             font-size: 25px;
         }
-    
+
         input {
             display: block;
             margin: 10px 0 5px;
@@ -62,7 +62,7 @@
             border-radius: 10px;
             background-color: #fafafa;
             border: 2px solid #f1f1f1;
-    
+
             &:focus {
                 outline: none;
                 border: 2px solid #dbdbdb;
@@ -85,8 +85,8 @@
             background-color: #4372d9;
             color: white;
             border: none;
-    
-            &:hover, 
+
+            &:hover,
             &:focus {
                 background-color: #3f6bca;
             }

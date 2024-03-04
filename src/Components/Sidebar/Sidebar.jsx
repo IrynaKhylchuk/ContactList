@@ -24,18 +24,18 @@ const Sidebar = () => {
     const [hide, setHide] = useState(false)
     const [hideEdit, setHideEdit] = useState(false)
     const [hoveredCategory, setHoveredCategory] = useState(null)
-    const [{id, category}, setInitialValues] = useState({id: "", category: ""})
+    const [{ id, category }, setInitialValues] = useState({ id: "", category: "" })
 
     const contacts = useSelector(state => state.contacts)
     const categories = useSelector(state => state.categories)
     const dispatch = useDispatch()
 
     const allContacts = contacts.length
-    
+
     const initialValues = {
         id: "",
         category: ""
-    }    
+    }
 
     const validationSchema = Yup.object().shape({
         category: Yup.string().required("Category is required")
@@ -49,30 +49,30 @@ const Sidebar = () => {
         if (categoryName.indexOf(values.category.toLowerCase()) !== -1) {
             alert("This category already exists")
         } else
-        dispatch(addCategory(values))
+            dispatch(addCategory(values))
         resetForm()
         setHide(false)
     }
-    
+
     const handleDeleteCategory = (id) => {
         dispatch(deleteCategory(id))
     }
-    
-    const handleSubmitEdit = (values, {resetForm}) => {
+
+    const handleSubmitEdit = (values, { resetForm }) => {
         dispatch(updateCategory(values))
         resetForm()
         setHideEdit(false)
     }
-    
+
     const toggleHide = () => {
         setHide(!hide)
     }
-    
+
     const toggleHideEdit = (category) => {
         setInitialValues(category)
         setHideEdit(!hideEdit)
     }
-    
+
     let initialValuesEdit = {
         id: id,
         category: category
@@ -87,27 +87,27 @@ const Sidebar = () => {
         <div className="sidebar">
             <ul>
                 <li>All contacts <span>{allContacts}</span></li>
-                <li className="category font-medium"> Category 
+                <li className="category font-medium"> Category
                     <span>
-                        <button onClick={toggleHide}> 
-                        <AddCircleOutlineIcon />
+                        <button onClick={toggleHide}>
+                            <AddCircleOutlineIcon />
                         </button>
                     </span>
                 </li>
-                
+
                 {categories.map((category) => (
                     <li className="position-relative" key={category.id}
                         onMouseEnter={() => setHoveredCategory(category.id)}
                         onMouseLeave={() => setHoveredCategory(null)}
                         onClick={() => filteredContactsArr(category)}
                     >
-                        {category.category} 
+                        {category.category}
                         <span>{category.contacts.length}</span>
                         {hoveredCategory === category.id && (
                             <div className="position-absolute editDelete">
                                 <button onClick={() => {
                                     toggleHideEdit(category)
-                                    }}><EditIcon /></button>
+                                }}><EditIcon /></button>
                                 <button onClick={() => handleDeleteCategory(category.id)}><DeleteIcon /></button>
                             </div>
                         )}
@@ -119,28 +119,28 @@ const Sidebar = () => {
                 <h1 className="font-medium">Add new category</h1>
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                     {() => (
-                    <Form>
-                        <label htmlFor="category">Category</label>
-                        <Field type="text" name="category" id="category" placeholder="Category"/>
-                        <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
-                        <button type="submit">Add</button>
-                    </Form>
+                        <Form>
+                            <label htmlFor="category">Category</label>
+                            <Field type="text" name="category" id="category" placeholder="Category" />
+                            <ErrorMessage name="category" component="p" className="text-danger position-absolute" />
+                            <button type="submit">Add</button>
+                        </Form>
                     )}
                 </Formik>
             </div>
 
             <div style={{ display: hideEdit ? "block" : "none" }} className="position-absolute editCategory">
                 <h1 className="font-medium">Edit category</h1>
-                <Formik 
-                    initialValues={initialValuesEdit} 
-                    enableReinitialize 
-                    validationSchema={validationSchema} 
+                <Formik
+                    initialValues={initialValuesEdit}
+                    enableReinitialize
+                    validationSchema={validationSchema}
                     onSubmit={handleSubmitEdit}>
                     {() => (
                         <Form>
                             <label htmlFor="category">Category</label>
-                            <Field type="text" name="category" id="categoryEdit" placeholder="Category"/>
-                            <ErrorMessage name="category" component="p" className="text-danger position-absolute"/>
+                            <Field type="text" name="category" id="categoryEdit" placeholder="Category" />
+                            <ErrorMessage name="category" component="p" className="text-danger position-absolute" />
                             <button type="submit">Save</button>
                         </Form>
                     )}

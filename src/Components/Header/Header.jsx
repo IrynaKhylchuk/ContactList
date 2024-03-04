@@ -36,7 +36,7 @@ const Header = () => {
                 <div className="add-search">
                     <Link to="/new-contact">Add New</Link>
                     <div className="searchBox">
-                        <input className="searchInput" type="text" name="search" placeholder="Search" onChange={handleChange}/>
+                        <input className="searchInput" type="text" name="search" placeholder="Search" onChange={handleChange} />
                         <button className="searchButton"><SearchIcon /></button>
                     </div>
                 </div>

@@ -19,8 +19,8 @@ const NotFound = () => {
                     <h2>not found</h2>
                     <span>Ніколи такого не було і ось знову</span>
                     <Link className="back" to="/">
-                Back
-            </Link>
+                        Back
+                    </Link>
                 </div>
             </div>
         </div>

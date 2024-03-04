@@ -25,17 +25,17 @@ const ContactItem = () => {
         dispatch(deleteContact(id))
     }
 
-    const filteredContacts = 
-    searchSymbols 
-    ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
-    : contacts
+    const filteredContacts =
+        searchSymbols
+            ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
+            : contacts
 
     const getCategoryNameById = (categoryId) => {
         let category = categories.find(c => c.id === categoryId)
 
         if (category === undefined) {
             return "Undefined"
-        } 
+        }
         return category.category
     }
 
@@ -45,7 +45,7 @@ const ContactItem = () => {
                 <div key={contact.id} className="row">
                     <div className="col-4 person">
                         <button>
-                            <StarBorderIcon/>
+                            <StarBorderIcon />
                         </button>
                         <img src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`} alt="avatar" />
                         <div className="name-number">

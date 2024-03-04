@@ -2,13 +2,13 @@
     text-transform: capitalize;
     text-align: center;
     color: #555555;
-    
-    > div { 
+
+    >div {
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        
+
     }
 
     img {
@@ -37,7 +37,7 @@
         text-decoration: none;
         border: none;
 
-        &:hover, 
+        &:hover,
         &:focus {
             background-color: #3f6bca;
         }
