@@ -1,4 +1,4 @@
-import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
+import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, TOGGLE_FAVORITE, SEARCH_CONTACT, FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
 
 export const addContact = (newContact) => {
     return {
@@ -18,6 +18,13 @@ export const updateContact = (updatedContact) => {
     return {
         type: UPDATE_CONTACT,
         payload: updatedContact
+    }
+}
+
+export const toggleFavorite = (contactId) => {
+    return {
+        type: TOGGLE_FAVORITE,
+        payload: contactId
     }
 }
 

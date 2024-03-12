@@ -3,6 +3,7 @@ import "./ContactItem.scss"
 
 // icons
 import StarBorderIcon from "@mui/icons-material/StarBorder"
+import StarIcon from "@mui/icons-material/Star"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 
@@ -13,7 +14,7 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // actions
-import { deleteContact } from "../../redux/actions"
+import { deleteContact, toggleFavorite } from "../../redux/actions"
 
 const ContactItem = () => {
     const contacts = useSelector(state => state.contacts)
@@ -23,6 +24,10 @@ const ContactItem = () => {
 
     const handleDeleteContact = (id) => {
         dispatch(deleteContact(id))
+    }
+
+    const handleFavoriteToggle = (id) => {
+        dispatch(toggleFavorite(id))
     }
 
     const filteredContacts =
@@ -44,8 +49,8 @@ const ContactItem = () => {
             {filteredContacts.map(contact => (
                 <div key={contact.id} className="row">
                     <div className="col-4 person">
-                        <button>
-                            <StarBorderIcon />
+                        <button onClick={() => handleFavoriteToggle(contact.id)}>
+                            {contact.favorite ? <StarIcon /> : <StarBorderIcon />}
                         </button>
                         <img src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`} alt="avatar" />
                         <div className="name-number">

@@ -1,5 +1,7 @@
-import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT, 
-    FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
+import {
+    ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT,
+    FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY, TOGGLE_FAVORITE
+} from "./type"
 
 const initialState = {
     contacts: [
@@ -48,12 +50,22 @@ const reducer = (state = initialState, action) => {
                         category.contacts.push(action.payload.id)
                     }
                     return category
-                  })
+                })
             }
         case DELETE_CONTACT:
             return {
                 ...state,
                 contacts: state.contacts.filter(contact => contact.id !== action.payload)
+            }
+        case TOGGLE_FAVORITE:
+            return {
+                ...state,
+                contacts: state.contacts.map(contact => {
+                    if (contact.id === action.payload) {
+                        return { ...contact, favorite: !contact.favorite }
+                    }
+                    return contact
+                })
             }
         case UPDATE_CONTACT:
             return {
@@ -62,15 +74,15 @@ const reducer = (state = initialState, action) => {
                     let updatedContact = action.payload
 
                     if (contact.id === updatedContact.id) {
-                      return {...contact, ...updatedContact}
-                    } 
+                        return { ...contact, ...updatedContact }
+                    }
                     return contact
-                  }),
+                }),
                 categories: state.categories.map(category => {
                     const contactId = action.payload.id
                     const newCategoryId = action.payload.categoryId
                     const oldCategoryId = state.contacts.find(c => c.id === contactId).categoryId
-                    
+
                     if (newCategoryId !== oldCategoryId) {
                         const newCategory = state.categories.find(c => c.id === newCategoryId)
                         const oldCategory = state.categories.find(c => c.id === oldCategoryId)
@@ -111,7 +123,7 @@ const reducer = (state = initialState, action) => {
                     let updatedCategory = action.payload
 
                     if (category.id === updatedCategory.id) {
-                        return {...category, ...updatedCategory}
+                        return { ...category, ...updatedCategory }
                     } return category
                 })
             }
