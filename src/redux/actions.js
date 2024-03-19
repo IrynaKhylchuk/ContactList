@@ -1,4 +1,4 @@
-import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, TOGGLE_FAVORITE, SEARCH_CONTACT, FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY } from "./type"
+import { ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, TOGGLE_FAVORITE, SEARCH_CONTACT, FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY, FILTER_CONTACTS_BY_CATEGORY } from "./type"
 
 export const addContact = (newContact) => {
     return {
@@ -60,5 +60,12 @@ export const updateCategory = (updatedCategory) => {
     return {
         type: UPDATE_CATEGORY,
         payload: updatedCategory
+    }
+}
+
+export const filterContactsByCategory = (categoryId) => {
+    return {
+        type: FILTER_CONTACTS_BY_CATEGORY,
+        payload: categoryId
     }
 }

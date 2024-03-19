@@ -20,8 +20,12 @@
             margin: 0;
         }
 
-        >div:last-child a:first-child {
-            margin-right: 10px;
+        >div:last-child {
+            text-align: right;
+
+            a:first-child {
+                margin-right: 10px;
+            }
         }
 
         .person {

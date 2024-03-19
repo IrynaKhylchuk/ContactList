@@ -18,7 +18,9 @@ import * as Yup from "yup"
 import { v4 as uuidv4 } from "uuid"
 
 // actions
-import { addCategory, deleteCategory, updateCategory, filteredContacts } from "../../redux/actions"
+import {
+    addCategory, deleteCategory, updateCategory, filterContactsByCategory
+} from "../../redux/actions"
 
 const Sidebar = () => {
     const [hide, setHide] = useState(false)
@@ -31,6 +33,10 @@ const Sidebar = () => {
     const dispatch = useDispatch()
 
     const allContacts = contacts.length
+
+    const filteredContactsArr = (categoryId) => {
+        dispatch(filterContactsByCategory(categoryId))
+    }
 
     const initialValues = {
         id: "",
@@ -78,11 +84,6 @@ const Sidebar = () => {
         category: category
     }
 
-    const filteredContactsArr = (category) => {
-        dispatch(filteredContacts(category))
-        console.log(category)
-    }
-
     return (
         <div className="sidebar">
             <ul>
@@ -96,15 +97,15 @@ const Sidebar = () => {
                 </li>
 
                 {categories.map((category) => (
-                    <li className="position-relative" key={category.id}
+                    <li key={category.id}
                         onMouseEnter={() => setHoveredCategory(category.id)}
                         onMouseLeave={() => setHoveredCategory(null)}
-                        onClick={() => filteredContactsArr(category)}
+                        onClick={() => filteredContactsArr(category.id)}
                     >
                         {category.category}
                         <span>{category.contacts.length}</span>
                         {hoveredCategory === category.id && (
-                            <div className="position-absolute editDelete">
+                            <div className="editDelete">
                                 <button onClick={() => {
                                     toggleHideEdit(category)
                                 }}><EditIcon /></button>

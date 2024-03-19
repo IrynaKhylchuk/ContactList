@@ -20,14 +20,19 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 20px;
+            position: relative;
+
+            &:hover:not(.category) {
+                background-color: rgba($color: #000000, $alpha: .1);
+            }
 
             &:first-child {
                 border-bottom: 1px solid #dbdbdb;
             }
 
             .editDelete {
-                width: 270px;
-                background-color: rgba($color: #000000, $alpha: .1);
+                position: absolute;
+                width: 90%;
                 text-align: center;
                 animation: opacityChange .5s;
             }
@@ -91,5 +96,12 @@
                 background-color: #3f6bca;
             }
         }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sidebar {
+        border: none;
+        margin-bottom: 20px;
     }
 }

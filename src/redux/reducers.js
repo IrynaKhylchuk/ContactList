@@ -1,6 +1,7 @@
 import {
     ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT,
-    FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY, TOGGLE_FAVORITE
+    FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY, TOGGLE_FAVORITE,
+    FILTER_CONTACTS_BY_CATEGORY
 } from "./type"
 
 const initialState = {
@@ -126,6 +127,11 @@ const reducer = (state = initialState, action) => {
                         return { ...category, ...updatedCategory }
                     } return category
                 })
+            }
+        case FILTER_CONTACTS_BY_CATEGORY:
+            return {
+                ...state,
+                contacts: state.contacts.filter(c => c.id === action.payload ? c.contacts : null)
             }
         default:
             return state

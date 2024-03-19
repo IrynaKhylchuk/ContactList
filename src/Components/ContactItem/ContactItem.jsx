@@ -48,7 +48,7 @@ const ContactItem = () => {
         <div className="contactItem">
             {filteredContacts.map(contact => (
                 <div key={contact.id} className="row">
-                    <div className="col-4 person">
+                    <div className="col-6 col-sm-4 person">
                         <button onClick={() => handleFavoriteToggle(contact.id)}>
                             {contact.favorite ? <StarIcon /> : <StarBorderIcon />}
                         </button>
@@ -58,13 +58,13 @@ const ContactItem = () => {
                             <p>{contact.phone}</p>
                         </div>
                     </div>
-                    <div className="col-2">
+                    <div className="d-none d-sm-block col-sm-2">
                         <p>{getCategoryNameById(contact.categoryId)}</p>
                     </div>
-                    <div className="col-4">
+                    <div className="d-none d-sm-block col-sm-4">
                         <p>{contact.email}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-6 col-sm-2">
                         <Link to={`/update-contact/${contact.id}`}>
                             <button>
                                 <EditIcon />
