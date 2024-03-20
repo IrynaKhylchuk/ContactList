@@ -85,7 +85,9 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <ul>
-                <li onClick={() => dispatch(filterContactsByCategory())}>All contacts <span>{allContacts}</span></li>
+                <li onClick={() => dispatch(filterContactsByCategory())}>
+                    All contacts <span>{allContacts}</span>
+                </li>
                 <li className="category font-medium"> Category
                     <span>
                         <button onClick={toggleHide}>

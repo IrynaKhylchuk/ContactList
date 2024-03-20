@@ -24,6 +24,7 @@ const ContactItem = () => {
 
     const handleFavoriteToggle = (id) => {
         dispatch(toggleFavorite(id))
+        dispatch(filterContactsByCategory())
     }
 
     const filteredContactsToDisplay =

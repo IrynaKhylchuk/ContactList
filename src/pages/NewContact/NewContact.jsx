@@ -32,7 +32,6 @@ const NewContact = () => {
     const handleSubmit = (values) => {
         dispatch(addContact(values))
         dispatch(filterContactsByCategory())
-        localStorage.setItem(values.id, JSON.stringify(values))
         navigate("/")
     }
 

@@ -1,4 +1,3 @@
-import { filteredContacts } from "./actions"
 import {
     ADD_CONTACT, DELETE_CONTACT, UPDATE_CONTACT, SEARCH_CONTACT,
     FILTERED_CONTACTS, ADD_CATEGORY, DELETE_CATEGORY, UPDATE_CATEGORY, TOGGLE_FAVORITE,
@@ -29,28 +28,7 @@ let contactList = [
 ]
 
 const initialState = {
-    contacts: [
-        {
-            id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e2",
-            name: "John",
-            phone: "1234567890",
-            email: "johnDoe@mail.com",
-            avatar: 45,
-            gender: "Men",
-            categoryId: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
-            favorite: true
-        },
-        {
-            id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e3",
-            name: "Jane",
-            phone: "1234567890",
-            email: "janeDoe@mail.com",
-            avatar: 55,
-            gender: "Women",
-            categoryId: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
-            favorite: true
-        }
-    ],
+    contacts: contactList,
     searchSymbols: "",
     categories: [
         {
@@ -62,28 +40,7 @@ const initialState = {
             ]
         }
     ],
-    filteredContacts: [
-        {
-            id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e2",
-            name: "John",
-            phone: "1234567890",
-            email: "johnDoe@mail.com",
-            avatar: 45,
-            gender: "Men",
-            categoryId: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
-            favorite: true
-        },
-        {
-            id: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e3",
-            name: "Jane",
-            phone: "1234567890",
-            email: "janeDoe@mail.com",
-            avatar: 55,
-            gender: "Women",
-            categoryId: "cb1f89af-e866-4ca7-9118-e9e74c2dc0e4",
-            favorite: true
-        }
-    ]
+    filteredContacts: contactList
 }
 
 const reducer = (state = initialState, action) => {
