@@ -14,39 +14,36 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 // actions
-import { deleteContact, toggleFavorite } from "../../redux/actions"
+import { deleteContact, toggleFavorite, filterContactsByCategory } from "../../redux/actions"
 
 const ContactItem = () => {
-    const contacts = useSelector(state => state.contacts)
+    const dispatch = useDispatch()
+    const contacts = useSelector(state => state.filteredContacts)
     const searchSymbols = useSelector(state => state.searchSymbols)
     const categories = useSelector(state => state.categories)
-    const dispatch = useDispatch()
-
-    const handleDeleteContact = (id) => {
-        dispatch(deleteContact(id))
-    }
 
     const handleFavoriteToggle = (id) => {
         dispatch(toggleFavorite(id))
     }
 
-    const filteredContacts =
+    const filteredContactsToDisplay =
         searchSymbols
             ? contacts.filter(contact => contact.name.toLowerCase().includes(searchSymbols))
             : contacts
 
     const getCategoryNameById = (categoryId) => {
         let category = categories.find(c => c.id === categoryId)
+        return category ? category.category : "Undefined"
+    }
 
-        if (category === undefined) {
-            return "Undefined"
-        }
-        return category.category
+    const handleDeleteContact = (id) => {
+        dispatch(deleteContact(id))
+        dispatch(filterContactsByCategory())
     }
 
     return (
         <div className="contactItem">
-            {filteredContacts.map(contact => (
+            {filteredContactsToDisplay.map(contact => (
                 <div key={contact.id} className="row">
                     <div className="col-6 col-sm-4 person">
                         <button onClick={() => handleFavoriteToggle(contact.id)}>

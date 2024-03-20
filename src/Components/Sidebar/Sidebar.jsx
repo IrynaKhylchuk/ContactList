@@ -27,7 +27,6 @@ const Sidebar = () => {
     const [hideEdit, setHideEdit] = useState(false)
     const [hoveredCategory, setHoveredCategory] = useState(null)
     const [{ id, category }, setInitialValues] = useState({ id: "", category: "" })
-
     const contacts = useSelector(state => state.contacts)
     const categories = useSelector(state => state.categories)
     const dispatch = useDispatch()
@@ -60,10 +59,6 @@ const Sidebar = () => {
         setHide(false)
     }
 
-    const handleDeleteCategory = (id) => {
-        dispatch(deleteCategory(id))
-    }
-
     const handleSubmitEdit = (values, { resetForm }) => {
         dispatch(updateCategory(values))
         resetForm()
@@ -84,6 +79,9 @@ const Sidebar = () => {
         category: category
     }
 
+    const handleDeleteCategory = (id) => {
+        dispatch(deleteCategory(id))
+    }
     return (
         <div className="sidebar">
             <ul>

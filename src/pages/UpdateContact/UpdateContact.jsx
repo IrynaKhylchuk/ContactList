@@ -8,7 +8,7 @@ import { validationSchema } from "../../assets/validation/validation"
 // hooks
 import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { updateContact } from "../../redux/actions"
+import { updateContact, filterContactsByCategory } from "../../redux/actions"
 
 const UpdateContact = () => {
     const { id } = useParams()
@@ -33,6 +33,7 @@ const UpdateContact = () => {
     const handleSubmit = (values) => {
         if (contact !== values) {
             dispatch(updateContact(values))
+            dispatch(filterContactsByCategory())
         }
 
         navigate("/")

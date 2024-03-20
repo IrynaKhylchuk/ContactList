@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid"
 // hooks
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { addContact } from "../../redux/actions"
+import { addContact, filterContactsByCategory } from "../../redux/actions"
 
 const NewContact = () => {
     const navigate = useNavigate()
@@ -31,6 +31,7 @@ const NewContact = () => {
 
     const handleSubmit = (values) => {
         dispatch(addContact(values))
+        dispatch(filterContactsByCategory())
         localStorage.setItem(values.id, JSON.stringify(values))
         navigate("/")
     }
